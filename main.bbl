@@ -1,0 +1,47 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{GGP23}
+
+\bibitem[Bie94]{UCAM-CL-TR-346}
+G.M. Bierman, \emph{{On intuitionistic linear logic}}, Tech. Report
+  UCAM-CL-TR-346, University of Cambridge, Computer Laboratory, August 1994.
+
+\bibitem[Buz24]{buzoku2024prooftheoretic}
+Yll Buzoku, \emph{A proof-theoretic semantics for intuitionistic linear logic},
+  2024.
+
+\bibitem[GGP23]{AlexTaoDavid}
+Alexander~V. Gheorghiu, Tao Gu, and David~J. Pym, \emph{Proof-theoretic
+  semantics for intuitionistic multiplicative linear logic}, Automated
+  Reasoning with Analytic Tableaux and Related Methods (Cham) (Revantha
+  Ramanayake and Josef Urban, eds.), Springer Nature Switzerland, 2023,
+  pp.~367--385.
+
+\bibitem[Gir95]{girard_1995}
+J.-Y. Girard, \emph{Linear logic: its syntax and semantics}, London
+  Mathematical Society Lecture Note Series, p.~1–42, Cambridge University
+  Press, 1995.
+
+\bibitem[GP22]{gheorghiu2022prooftheoretic}
+Alexander~V. Gheorghiu and David~J. Pym, \emph{From proof-theoretic validity to
+  base-extension semantics for intuitionistic propositional logic}, 2022.
+
+\bibitem[Neg02]{Negri2002-NEGANS}
+Sara Negri, \emph{A normalizing system of natural deduction for intuitionistic
+  linear logic}, Archive for Mathematical Logic \textbf{41} (2002), no.~8,
+  789--810.
+
+\bibitem[San05]{Sandqvist:2005}
+Tor Sandqvist, \emph{An inferentialist interpretation of classical logic},
+  Ph.D. thesis, Uppsala universitet, 2005.
+
+\bibitem[San15]{Tor2015}
+\bysame, \emph{Base-extension semantics for intuitionistic sentential logic},
+  Log. J. IGPL \textbf{23} (2015), 719--731.
+
+\end{thebibliography}

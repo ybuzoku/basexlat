@@ -1,0 +1,326 @@
+\documentclass{beamer}
+\usetheme{ucl}
+
+\input{package}
+\input{macro}
+
+
+\setbeamersize{description width=2em}
+%%% Remove nav symbols (and shift any logo down to corner)
+\setbeamertemplate{navigation symbols}{\vspace{-2ex}}
+\setbeamertemplate{footline}[author title date]
+\setbeamercolor{banner}{bg=darkpurple}
+\useinnertheme{blockborder}
+
+\graphicspath{{./images/} }
+\title[B-eS for ILL]{Translations between bases in Base-extension Semantics}
+%\author{\texorpdfstring{Yll Buzoku\newline\url{y.buzoku@ucl.ac.uk}}{https://www.homepages.ucl.ac.uk/~zcapybu/}}
+\author{Yll Buzoku}
+\institute[UCL]{%
+  Department of Computer Science \\ %
+  University College London
+}
+\date{November 22, 2024}
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Presentation root directory}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\titlepage
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Goals for this presentation}
+\begin{frame}{Goals for this talk}
+\begin{itemize}
+\item Introduce the concept of bases and general inference figures
+\item Introduce two notions of atomic derivability
+\item Show how one may relate these notions of atomic derivability
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Presentation root directory}
+\tableofcontents
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Bases and inference figures}
+\begin{frame}{Notation}
+	\begin{itemize}%[label={-}]
+		\item $\At$ represents a fixed, countably infinite set of propositional atoms. 
+		\item Lower case latin letters represent propositional atoms.
+		\item Upper case latin letters represent finite multisets of propositional atoms. 
+		\item Atomic multiset is taken to mean multiset of propositional atoms.
+		\item The sum of two multisets $\at{P}$ and $\at{Q}$ is denoted $\at{P}\msetsum\at{Q}$. 
+	\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Atomic rules}
+Atomic rules take the form: \newline 
+\begin{center}
+	$\langle\langle P_1,p_1\rangle,\dots,\langle P_n,p_n\rangle,p\rangle$	
+\end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Atomic rules}
+Pictorially, we can represent this as: \newline 
+\begin{center}
+	\begin{prooftree}
+		\AxiomC{$[P_1]$}
+		\noLine
+		\UnaryInfC{$p_1$}
+		\AxiomC{$\dots$}
+		\AxiomC{$[P_n]$}
+		\noLine
+		\UnaryInfC{$p_n$}
+		\TrinaryInfC{$p$}
+	\end{prooftree}
+	\pause
+	\vspace{1.8cm}
+	\emph{Any idea what these figures are supposed to look like?}\newline
+	\pause
+	\textbf{Natural deduction!}
+\end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Contextual atomic rules}
+	Contextual atomic rules are rules which may have contextual brackets distributed across them.
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Contextual atomic rules}
+Pictorially, we can represent this as: \newline 
+
+\begin{prooftree}
+	\AxiomC{$\left\{\raisebox{-0.5em}{$\deduce{p_{1_1} \quad \ldots \quad p_{1_{l_1}}}{[P_{1_1}] \hspace{2.8em} [P_{1_{l_n}}]}$}\right\}$}
+	\AxiomC{$\ldots$}
+	\AxiomC{$\left\{\raisebox{-0.5em}{$\deduce{p_{n_1} \quad \ldots \quad p_{n_{l_n}}}{[P_{n_1}] \hspace{2.8em} [P_{n_{l_n}}]}$}\right\}$}
+	\TrinaryInfC{$p$}
+\end{prooftree}
+\pause
+or like this:\newline
+\begin{center}
+	$\langle\openaddrule \langle P_{1_i},p_{1_i}\rangle\closeaddrule^{l_1}_{i=1}, \dots, \openaddrule \langle P_{n_i},p_{n_i}\rangle\closeaddrule^{l_n}_{i=1}, p\rangle$
+\end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Examples of atomic rules}
+	\begin{itemize}
+		\item $\langle\openaddrule\langle \emptymultiset, a\rangle\closeaddrule, c\rangle$
+		\item $\langle\openaddrule\langle \emptymultiset,a\rangle\closeaddrule, \openaddrule\langle c,d,e\rangle, \langle f,g\rangle\closeaddrule, q\rangle$ 
+		\item $\langle\openaddrule\langle a, b\rangle\closeaddrule, \openaddrule\langle \emptymultiset,e\rangle\closeaddrule, \langle f,g\rangle, q\rangle$
+		\item $\langle\langle \emptymultiset,a\rangle,c\rangle$
+		\item $\langle\langle \emptymultiset,b\rangle,c\rangle$
+		\item $\langle\langle \emptymultiset,c\rangle,\langle a,p\rangle, \langle b,p\rangle, p\rangle$
+	\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Atomic derivability}
+\begin{frame}{Context-free atomic derivability}
+\begin{definition}[$\deriveBaseIPL{\baseB}$]
+The relation of derivability in a context-free base $\baseB$, is defined as so:
+\begin{itemize}
+    \item[Ref] $S\deriveBaseIPL{\baseB}p$ if $p\in S$.
+    \item[App] For $\langle\langle P_1, p_1\rangle, \dots, \langle P_n, p_n\rangle, q\rangle \in \baseB$ and $S\msetsum P_i\deriveBaseIPL{\baseB}p_i$ for each $i\in \{1,\dots,n\}$ then $S\deriveBaseIPL{\baseB}q$.
+\end{itemize}
+\end{definition}
+\pause
+\begin{definition}[$\deriveBaseM{\baseB}$]
+The relation of derivability in a contextual base $\baseB$, is defined as so:
+\begin{itemize}
+    \item[Ref] $p\deriveBaseM{\baseB}p$.
+    \item[App] For $\langle\openaddrule\langle P_{1_i}, p_{1_{i}}\rangle\Closeaddrule{i=1}{l_1},\dots,\openaddrule \langle P_{n_i}, p_{n_{i}}\rangle \Closeaddrule{i=1}{l_n}, q\rangle \in \baseB$ and $C_i\msetsum P_{i_j}\deriveBaseM{\baseB}p_{i_j}$ for each $i\in \{1,\dots,n\}$ and $j \in \{1,\dots,l_i\}$ then $C_1\msetsum\dots\msetsum C_n\deriveBaseM{\baseB}q$.
+\end{itemize}
+\end{definition}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Example derivations}
+	\begin{example}[Derivation terminations]
+		Let $\baseB=\{(\Rightarrow a), (\openaddrule \Rightarrow a \closeaddrule,\openaddrule\Rightarrow b\closeaddrule\Rightarrow c)\}$
+		\begin{prooftree}
+			\AxiomC{}
+			\RightLabel{Ref}
+			\UnaryInfC{$b\deriveBaseM{\baseB}b$}
+			\AxiomC{}
+			\RightLabel{$\Rightarrow a$}
+			\UnaryInfC{$\deriveBaseM{\baseB}a$}
+			\RightLabel{$\openaddrule \Rightarrow a \closeaddrule,\openaddrule\Rightarrow b\closeaddrule\Rightarrow c$}
+			\BinaryInfC{$b\deriveBaseM{\baseB}c$}
+		\end{prooftree}
+		Therefore, in $\baseB$, the atom $c$ is derivable from $b$. 
+	\end{example}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Example derivations}
+	\begin{example}[Invalid derivation]
+		By the definition of $\deriveBaseM{\baseB}$, deriving $a$ from $a\msetsum a$ in the empty base is not possible, i.e. $a\msetsum a\deriveBaseM{\emptybase}a$ is not possible.
+	\end{example}
+	\pause
+	\begin{example}[Invalid derivation 2]
+		Let $\baseB=\{(\openaddrule\Rightarrow a\closeaddrule\Rightarrow c), (\openaddrule a\Rightarrow c\closeaddrule\Rightarrow b)\}$
+		\begin{prooftree}
+			\AxiomC{$\times$}
+			\UnaryInfC{$a\msetsum a\deriveBaseM{\baseB}a$}
+			\RightLabel{$\openaddrule\Rightarrow a\closeaddrule\Rightarrow c$}
+			\UnaryInfC{$a\msetsum a\deriveBaseM{\baseB}c$}
+			\RightLabel{$\openaddrule a\Rightarrow c\closeaddrule\Rightarrow b$}
+			\UnaryInfC{$a\deriveBaseM{\baseB}b$}
+		\end{prooftree}
+		We see that in this base, $a$ is not derivable from $a\msetsum a$.
+	\end{example}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Example derivations}
+	\begin{example}[A possible fix for invalid derivation 2]
+		Let $\baseC=\{(\openaddrule \Rightarrow a\closeaddrule\Rightarrow c), (\openaddrule a\Rightarrow c\closeaddrule\Rightarrow b),(\openaddrule\Rightarrow a\closeaddrule,\openaddrule\Rightarrow a\closeaddrule\Rightarrow a)\}$
+		\begin{prooftree}
+			\AxiomC{}
+			\RightLabel{Ref}
+			\UnaryInfC{$a\deriveBaseM{\baseC}a$}			
+			\AxiomC{}
+			\RightLabel{Ref}
+			\UnaryInfC{$a\deriveBaseM{\baseC}a$}
+			\RightLabel{$\openaddrule\Rightarrow a\closeaddrule,\openaddrule\Rightarrow a\closeaddrule\Rightarrow a$}
+			\BinaryInfC{$a\msetsum a\deriveBaseM{\baseC}a$}
+			\RightLabel{$\openaddrule \Rightarrow a\closeaddrule\Rightarrow c$}
+			\UnaryInfC{$a\msetsum a\deriveBaseM{\baseC}c$}
+			\RightLabel{$\openaddrule a\Rightarrow c\closeaddrule\Rightarrow b$}
+			\UnaryInfC{$a\deriveBaseM{\baseC}b$}
+		\end{prooftree}
+		Note that $\baseC\supset\baseB$\hspace{5pt}!!
+	\end{example}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Example derivations}
+	\begin{example}[Another possible fix for invalid derivation 2]
+		Let $\baseD=\{(\openaddrule \Rightarrow a\closeaddrule\Rightarrow c), (\openaddrule a\Rightarrow c\closeaddrule\Rightarrow b),(\openaddrule\Rightarrow d\closeaddrule,\openaddrule\Rightarrow d\closeaddrule\Rightarrow a),(\openaddrule\Rightarrow a\closeaddrule\Rightarrow d)\}$
+		\begin{prooftree}
+			\AxiomC{}
+			\RightLabel{Ref}
+			\UnaryInfC{$a\deriveBaseM{\baseD}a$}
+			\RightLabel{$\openaddrule\Rightarrow a\closeaddrule\Rightarrow d$}
+			\UnaryInfC{$a\deriveBaseM{\baseD}d$}
+			\AxiomC{}
+			\RightLabel{Ref}
+			\UnaryInfC{$a\deriveBaseM{\baseD}a$}			
+			\RightLabel{$\openaddrule\Rightarrow a\closeaddrule\Rightarrow d$}
+			\UnaryInfC{$a\deriveBaseM{\baseD}d$}
+			\RightLabel{$\openaddrule\Rightarrow d\closeaddrule,\openaddrule\Rightarrow d\closeaddrule\Rightarrow a$}
+			\BinaryInfC{$a\msetsum a\deriveBaseM{\baseD}a$}
+			\RightLabel{$\openaddrule \Rightarrow a\closeaddrule\Rightarrow c$}
+			\UnaryInfC{$a\msetsum a\deriveBaseM{\baseD}c$}
+			\RightLabel{$\openaddrule a\Rightarrow c\closeaddrule\Rightarrow b$}
+			\UnaryInfC{$a\deriveBaseM{\baseD}b$}
+		\end{prooftree}
+	\end{example}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Example derivations}
+	\begin{example}[A live complicated derivation!]
+		Consider a base $\baseB$ with only the following rules:
+		\begin{itemize}
+			\item $\openaddrule\Rightarrow c\closeaddrule,\openaddrule\Rightarrow y\closeaddrule\Rightarrow f$
+			\item $\Rightarrow z$
+			\item $\openaddrule \Rightarrow a\closeaddrule,\openaddrule \Rightarrow b\closeaddrule,\openaddrule\Rightarrow z\closeaddrule\Rightarrow h$
+			\item $\openaddrule\Rightarrow h\closeaddrule\Rightarrow g$
+			\item $\openaddrule\Rightarrow x\closeaddrule,\openaddrule\Rightarrow g\closeaddrule\Rightarrow e$
+			\item $\openaddrule x\Rightarrow e\closeaddrule,\openaddrule y\Rightarrow f\closeaddrule\Rightarrow d$
+		\end{itemize}
+		is there a derivation of $d$ from the multiset $a\msetsum b\msetsum c$ in $\baseB$?
+%		\begin{prooftree}
+%			\AxiomC{}
+%			\RightLabel{Ref}
+%			\UnaryInfC{$f\deriveBaseM{\baseB}f$}
+%			\AxiomC{}
+%			\RightLabel{Ref}
+%			\UnaryInfC{$c\deriveBaseM{\baseB}c$}
+%			\RightLabel{$\openaddrule\Rightarrow c\closeaddrule,\openaddrule\Rightarrow y\closeaddrule\Rightarrow f$}
+%			\BinaryInfC{$c,y\deriveBaseM{\baseB}f$}
+%			\AxiomC{}
+%			\RightLabel{$\Rightarrow z$}
+%			\UnaryInfC{$\deriveBaseM{\baseB}z$}
+%			\AxiomC{}
+%			\RightLabel{Inf}
+%			\UnaryInfC{$b\deriveBaseM{\baseB}b$}
+%			\AxiomC{}
+%			\RightLabel{Inf}
+%			\UnaryInfC{$a\deriveBaseM{\baseB}a$}
+%			\RightLabel{$\openaddrule \Rightarrow a\closeaddrule,\openaddrule \Rightarrow b\closeaddrule,\openaddrule\Rightarrow z\closeaddrule\Rightarrow h$}
+%			\TrinaryInfC{$a,b,\deriveBaseM{\baseB}h$}
+%			\RightLabel{$\openaddrule\Rightarrow h\closeaddrule\Rightarrow g$}
+%			\UnaryInfC{$a,b\deriveBaseM{\baseB}g$}
+%			\AxiomC{}
+%			\RightLabel{Ref}
+%			\UnaryInfC{$x\deriveBaseM{\baseB}x$}
+%			\RightLabel{$\openaddrule\Rightarrow x\closeaddrule,\openaddrule\Rightarrow g\closeaddrule\Rightarrow e$}
+%			\BinaryInfC{$a,b,x\deriveBaseM{\baseB}e$}
+%			\RightLabel{$\openaddrule x\Rightarrow e\closeaddrule,\openaddrule y\Rightarrow f\closeaddrule\Rightarrow d$}
+%			\BinaryInfC{$a,b,c\deriveBaseM{\baseB}b$}
+%		\end{prooftree}
+	\end{example}
+	\pause 
+	\emph{Disclaimer: The fact I couldn't fit this derivation on the slide has nothing to do with why we are doing this derivation live :-)}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Example derivations}
+	\begin{example}[A very interesting derivation]
+		Let $\baseB = \{
+		(\openaddrule\Rightarrow b\closeaddrule\Rightarrow c),
+		(\openaddrule\Rightarrow a\closeaddrule,\openaddrule b\Rightarrow c\closeaddrule\Rightarrow d),
+		(\openaddrule\Rightarrow d, \Rightarrow a \closeaddrule\Rightarrow e),
+		(\openaddrule a\Rightarrow e\closeaddrule\Rightarrow f)
+		\}$
+		\begin{prooftree}
+			\AxiomC{}
+			\RightLabel{Ref}
+			\UnaryInfC{$a\deriveBaseM{\baseB}a$}			
+			\AxiomC{}
+			\RightLabel{Ref}
+			\UnaryInfC{$b\deriveBaseM{\baseB}b$}
+			\RightLabel{$\openaddrule\Rightarrow b\closeaddrule\Rightarrow c$}
+			\UnaryInfC{$b\deriveBaseM{\baseB}c$}
+			\RightLabel{$\openaddrule\Rightarrow a\closeaddrule,\openaddrule b\Rightarrow c\closeaddrule\Rightarrow d$}
+			\BinaryInfC{$a\deriveBaseM{\baseB}d$}
+			\AxiomC{}
+			\RightLabel{Ref}
+			\UnaryInfC{$a\deriveBaseM{\baseB}a$}
+			\RightLabel{$\openaddrule\Rightarrow d, \Rightarrow a \closeaddrule\Rightarrow e$}
+			\BinaryInfC{$a\deriveBaseM{\baseB}e$}
+			\RightLabel{$\openaddrule a\Rightarrow e\closeaddrule\Rightarrow f$}
+			\UnaryInfC{$\deriveBaseM{\baseB}f$}
+		\end{prooftree}
+	\end{example}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Comparing relations}
+\begin{frame}{Comparing relations}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Thank you!}
+\begin{figure}
+	\begin{center}
+	  \includegraphics[width=\textwidth]{dosthanks2.png}
+	  \caption{Thank you from DOS!\,:D}
+	\end{center}
+  \end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[allowframebreaks]
+	\frametitle{References}
+	\nocite{*}
+	\bibliographystyle{amsalpha}
+	\bibliography{./refs/refs.bib}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
