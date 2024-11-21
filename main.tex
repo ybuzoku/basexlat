@@ -13,7 +13,7 @@
 \useinnertheme{blockborder}
 
 \graphicspath{{./images/} }
-\title[B-eS for ILL]{Translations between bases in Base-extension Semantics}
+\title[Translations between bases in B-eS]{Translations between bases in Base-extension Semantics}
 %\author{\texorpdfstring{Yll Buzoku\newline\url{y.buzoku@ucl.ac.uk}}{https://www.homepages.ucl.ac.uk/~zcapybu/}}
 \author{Yll Buzoku}
 \institute[UCL]{%
@@ -97,7 +97,7 @@ Pictorially, we can represent this as: \newline
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Contextual atomic rules}
-Pictorially, we can represent this as: \newline 
+Pictorially, we can represent such rules as: \newline 
 
 \begin{prooftree}
 	\AxiomC{$\left\{\raisebox{-0.5em}{$\deduce{p_{1_1} \quad \ldots \quad p_{1_{l_1}}}{[P_{1_1}] \hspace{2.8em} [P_{1_{l_n}}]}$}\right\}$}
@@ -106,7 +106,7 @@ Pictorially, we can represent this as: \newline
 	\TrinaryInfC{$p$}
 \end{prooftree}
 \pause
-or like this:\newline
+or linearly, like this:\newline
 \begin{center}
 	$\langle\openaddrule \langle P_{1_i},p_{1_i}\rangle\closeaddrule^{l_1}_{i=1}, \dots, \openaddrule \langle P_{n_i},p_{n_i}\rangle\closeaddrule^{l_n}_{i=1}, p\rangle$
 \end{center}
@@ -117,15 +117,36 @@ or like this:\newline
 		\item $\langle\openaddrule\langle \emptymultiset, a\rangle\closeaddrule, c\rangle$
 		\item $\langle\openaddrule\langle \emptymultiset,a\rangle\closeaddrule, \openaddrule\langle c,d,e\rangle, \langle f,g\rangle\closeaddrule, q\rangle$ 
 		\item $\langle\openaddrule\langle a, b\rangle\closeaddrule, \openaddrule\langle \emptymultiset,e\rangle\closeaddrule, \langle f,g\rangle, q\rangle$
+	\end{itemize}
+	\vspace{0.5cm}
+	\begin{itemize}
 		\item $\langle\langle \emptymultiset,a\rangle,c\rangle$
 		\item $\langle\langle \emptymultiset,b\rangle,c\rangle$
 		\item $\langle\langle \emptymultiset,c\rangle,\langle a,p\rangle, \langle b,p\rangle, p\rangle$
 	\end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Bases}
+	\begin{definition}[Base]
+		A base is a set of atomic rules.\newline
+		\pause
+		A base is said to be contextual if it contains contextual rules.\\
+		Else it is said to be context-free.
+	\end{definition}
+	\pause
+	\begin{itemize}
+		\item $\{(\openaddrule\Rightarrow a\closeaddrule\Rightarrow c), (\openaddrule a\Rightarrow c\closeaddrule\Rightarrow b)\}$
+		%
+		\item $\{(\openaddrule \Rightarrow a\closeaddrule\Rightarrow c), (\openaddrule a\Rightarrow c\closeaddrule\Rightarrow b),(\openaddrule\Rightarrow a\closeaddrule,\openaddrule\Rightarrow a\closeaddrule\Rightarrow a)\}$
+		%
+		\item $\{(\openaddrule \Rightarrow a\closeaddrule\Rightarrow c), (\openaddrule a\Rightarrow c\closeaddrule\Rightarrow b),(\openaddrule\Rightarrow d\closeaddrule,\openaddrule\Rightarrow d\closeaddrule\Rightarrow a),(\openaddrule\Rightarrow a\closeaddrule\Rightarrow d)\}$
+	\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Atomic derivability}
-\begin{frame}{Context-free atomic derivability}
-\begin{definition}[$\deriveBaseIPL{\baseB}$]
+\begin{frame}{Atomic derivability}
+\begin{definition}[Context-free atomic derivability $\deriveBaseIPL{\baseB}$]
 The relation of derivability in a context-free base $\baseB$, is defined as so:
 \begin{itemize}
     \item[Ref] $S\deriveBaseIPL{\baseB}p$ if $p\in S$.
@@ -133,7 +154,7 @@ The relation of derivability in a context-free base $\baseB$, is defined as so:
 \end{itemize}
 \end{definition}
 \pause
-\begin{definition}[$\deriveBaseM{\baseB}$]
+\begin{definition}[Contextual atomic derivability $\deriveBaseM{\baseB}$]
 The relation of derivability in a contextual base $\baseB$, is defined as so:
 \begin{itemize}
     \item[Ref] $p\deriveBaseM{\baseB}p$.
