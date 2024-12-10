@@ -20,7 +20,7 @@
   Department of Computer Science \\ %
   University College London
 }
-\date{November 22, 2024}
+\date{December 11, 2024}
 
 \AtBeginSection[]
 {
@@ -48,9 +48,9 @@
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Presentation root directory}
-\tableofcontents
-\end{frame}
+%\begin{frame}{Presentation root directory}
+%\tableofcontents
+%\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Bases and atomic rules}
@@ -59,7 +59,7 @@
 		\item $\At$ represents a fixed, countably infinite set of propositional atoms. 
 		\item Lower case latin letters represent propositional atoms.
 		\item Upper case latin letters represent finite multisets of propositional atoms. 
-		\item Atomic multiset is taken to mean multiset of propositional atoms.
+		%\item Atomic multiset is taken to mean multiset of propositional atoms.
 		\item The sum of two multisets $\at{P}$ and $\at{Q}$ is denoted $\at{P}\msetsum\at{Q}$. 
 	\end{itemize}
 \end{frame}
@@ -281,17 +281,17 @@ The relation of derivability in a contextual base $\baseB$, is defined as so:
 	\end{example}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Example derivations}
-	\begin{example}[A live complicated derivation!]
-		Consider a base $\baseB$ with only the following rules:
-		\begin{itemize}
-			\item $\openaddrule\Rightarrow c\closeaddrule,\openaddrule\Rightarrow y\closeaddrule\Rightarrow f$
-			\item $\Rightarrow z$
-			\item $\openaddrule \Rightarrow a\closeaddrule,\openaddrule \Rightarrow b\closeaddrule,\openaddrule\Rightarrow z\closeaddrule\Rightarrow h$
-			\item $\openaddrule\Rightarrow h\closeaddrule\Rightarrow g$			\item $\openaddrule\Rightarrow x\closeaddrule,\openaddrule\Rightarrow g\closeaddrule\Rightarrow e$
-			\item $\openaddrule x\Rightarrow e\closeaddrule,\openaddrule y\Rightarrow f\closeaddrule\Rightarrow d$
-		\end{itemize}
-		is there a derivation of $d$ from the multiset $a\msetsum b\msetsum c$ in $\baseB$?
+%\begin{frame}{Example derivations}
+%	\begin{example}[A live complicated derivation!]
+%		Consider a base $\baseB$ with only the following rules:
+%		\begin{itemize}
+%			\item $\openaddrule\Rightarrow c\closeaddrule,\openaddrule\Rightarrow y\closeaddrule\Rightarrow f$
+%			\item $\Rightarrow z$
+%			\item $\openaddrule \Rightarrow a\closeaddrule,\openaddrule \Rightarrow b\closeaddrule,\openaddrule\Rightarrow z\closeaddrule\Rightarrow h$
+%			\item $\openaddrule\Rightarrow h\closeaddrule\Rightarrow g$			\item $\openaddrule\Rightarrow x\closeaddrule,\openaddrule\Rightarrow g\closeaddrule\Rightarrow e$
+%			\item $\openaddrule x\Rightarrow e\closeaddrule,\openaddrule y\Rightarrow f\closeaddrule\Rightarrow d$
+%		\end{itemize}
+%		is there a derivation of $d$ from the multiset $a\msetsum b\msetsum c$ in $\baseB$?
 %		\begin{prooftree}
 %			\AxiomC{}
 %			\RightLabel{Ref}
@@ -322,10 +322,10 @@ The relation of derivability in a contextual base $\baseB$, is defined as so:
 %			\RightLabel{$\openaddrule x\Rightarrow e\closeaddrule,\openaddrule y\Rightarrow f\closeaddrule\Rightarrow d$}
 %			\BinaryInfC{$a,b,c\deriveBaseM{\baseB}b$}
 %		\end{prooftree}
-	\end{example}
+%	\end{example}
 %	\pause 
 %	\emph{Disclaimer: The fact I couldn't fit this derivation on the slide has nothing to do with why we are doing this derivation live :-)}
-\end{frame}
+%\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Comparing relations}
@@ -459,19 +459,24 @@ The relation of derivability in a contextual base $\baseB$, is defined as so:
 		\pause
 		\item $R\deriveBaseM{\iplill{\baseB}}p$ iff $\bang R \suppM{\iplill{\baseB}}{\emptymultiset}p$
 		\vspace{0.3cm}
-		\pause
-		\item $\suppM{\iplill{\baseB}}{R}p$ iff $\bang R\suppM{\iplill{\baseB}}{\emptymultiset}p$
+		%\pause
+		%\item $\suppM{\iplill{\baseB}}{R}p$ iff $\bang R\suppM{\iplill{\baseB}}{\emptymultiset}p$
 	\end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Thank you!}
-\begin{figure}
 	\begin{center}
-	  \includegraphics[width=\textwidth]{dosthanks2.png}
-	  \caption{Thank you from DOS!\,:D}
+		\textbf{Thank you for listening! \\ 
+		Comments? Observations? Please ask and/or feel free to \\
+		email me at y.buzoku@ucl.ac.uk}
 	\end{center}
-  \end{figure}
+%\begin{figure}
+%	\begin{center}
+%	  \includegraphics[width=\textwidth]{dosthanks2.png}
+%	  \caption{Thank you from DOS!\,:D}
+%	\end{center}
+%  \end{figure}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[allowframebreaks]
