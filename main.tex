@@ -67,7 +67,7 @@
 \begin{frame}{Atomic rules}
 Atomic rules take the form: \newline 
 \begin{center}
-	$\langle\langle P_1,p_1\rangle,\dots,\langle P_n,p_n\rangle,p\rangle$	
+	$(P_1\Rightarrow p_1),\dots, (P_n\Rightarrow p_n)\Rightarrow p$	
 \end{center}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -108,21 +108,21 @@ Pictorially, we can represent such rules as: \newline
 \pause
 or linearly, like this:\newline
 \begin{center}
-	$\langle\openaddrule \langle P_{1_i},p_{1_i}\rangle\closeaddrule^{l_1}_{i=1}, \dots, \openaddrule \langle P_{n_i},p_{n_i}\rangle\closeaddrule^{l_n}_{i=1}, p\rangle$
+	$\openaddrule (P_{1_i}\Rightarrow p_{1_i})\closeaddrule^{l_1}_{i=1}, \dots, \openaddrule (P_{n_i}\Rightarrow p_{n_i})\closeaddrule^{l_n}_{i=1}\Rightarrow p$
 \end{center}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Examples of atomic rules}
 	\begin{itemize}
-		\item $\langle\openaddrule\langle \emptymultiset, a\rangle\closeaddrule, c\rangle$
-		\item $\langle\openaddrule\langle \emptymultiset,a\rangle\closeaddrule, \openaddrule\langle c,d,e\rangle, \langle f,g\rangle\closeaddrule, q\rangle$ 
-		\item $\langle\openaddrule\langle a, b\rangle\closeaddrule, \openaddrule\langle \emptymultiset,e\rangle\closeaddrule, \langle f,g\rangle, q\rangle$
+		\item $\openaddrule \Rightarrow a\closeaddrule\Rightarrow c$
+		\item $\openaddrule \Rightarrow a\closeaddrule, \openaddrule (c\msetsum d \Rightarrow e), (f\Rightarrow g)\closeaddrule\Rightarrow q$ 
+		\item $\openaddrule a\Rightarrow b\closeaddrule, \openaddrule\Rightarrow e \closeaddrule, (f\Rightarrow g)\Rightarrow q$
 	\end{itemize}
 	\vspace{0.5cm}
 	\begin{itemize}
-		\item $\langle\langle \emptymultiset,a\rangle,c\rangle$
-		\item $\langle\langle \emptymultiset,b\rangle,c\rangle$
-		\item $\langle\langle \emptymultiset,c\rangle,\langle a,p\rangle, \langle b,p\rangle, p\rangle$
+		\item $(\Rightarrow a) \Rightarrow c$
+		\item $(\Rightarrow b) \Rightarrow c$
+		\item $(\Rightarrow c), (a \Rightarrow p), (b\Rightarrow p)\Rightarrow p$
 	\end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -135,7 +135,7 @@ or linearly, like this:\newline
 	\end{definition}
 	\pause
 	\begin{itemize}
-		\item $\{(\openaddrule\Rightarrow a\closeaddrule\Rightarrow c), (\openaddrule a\Rightarrow c\closeaddrule\Rightarrow b)\}$
+		\item $\{((\Rightarrow a) \Rightarrow c), ((\Rightarrow b) \Rightarrow c), ((\Rightarrow c), (a \Rightarrow p), (b\Rightarrow p)\Rightarrow p)\}$
 		%
 		\item $\{(\openaddrule \Rightarrow a\closeaddrule\Rightarrow c), (\openaddrule a\Rightarrow c\closeaddrule\Rightarrow b),(\openaddrule\Rightarrow a\closeaddrule,\openaddrule\Rightarrow a\closeaddrule\Rightarrow a)\}$
 		%
@@ -145,12 +145,12 @@ or linearly, like this:\newline
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Atomic derivability}
-\begin{frame}{Atomic derivability}
+\begin{frame}
 \begin{definition}[Context-free atomic derivability $\deriveBaseIPL{\baseB}$]
 The relation of derivability in a context-free base $\baseB$, is defined as so:
 \begin{itemize}
     \item[Ref] $S\deriveBaseIPL{\baseB}p$ if $p\in S$.
-    \item[App] For $\langle\langle P_1, p_1\rangle, \dots, \langle P_n, p_n\rangle, q\rangle \in \baseB$ and $S\msetsum P_i\deriveBaseIPL{\baseB}p_i$ for each $i\in \{1,\dots,n\}$ then $S\deriveBaseIPL{\baseB}q$.
+    \item[App] For $((P_1\Rightarrow p_1), \dots, (P_n\Rightarrow p_n)\Rightarrow q) \in \baseB$ and $S\msetsum P_i\deriveBaseIPL{\baseB}p_i$ for each $i\in \{1,\dots,n\}$ then $S\deriveBaseIPL{\baseB}q$.
 \end{itemize}
 \end{definition}
 \pause
@@ -158,7 +158,7 @@ The relation of derivability in a context-free base $\baseB$, is defined as so:
 The relation of derivability in a contextual base $\baseB$, is defined as so:
 \begin{itemize}
     \item[Ref] $p\deriveBaseM{\baseB}p$.
-    \item[App] For $\langle\openaddrule\langle P_{1_i}, p_{1_{i}}\rangle\Closeaddrule{i=1}{l_1},\dots,\openaddrule \langle P_{n_i}, p_{n_{i}}\rangle \Closeaddrule{i=1}{l_n}, q\rangle \in \baseB$ and $C_i\msetsum P_{i_j}\deriveBaseM{\baseB}p_{i_j}$ for each $i\in \{1,\dots,n\}$ and $j \in \{1,\dots,l_i\}$ then $C_1\msetsum\dots\msetsum C_n\deriveBaseM{\baseB}q$.
+    \item[App] For $(\openaddrule(P_{1_i}\Rightarrow p_{1_{i}})\Closeaddrule{i=1}{l_1},\dots,\openaddrule (P_{n_i}\Rightarrow p_{n_{i}})\Closeaddrule{i=1}{l_n}\Rightarrow q) \in \baseB$ and $C_i\msetsum P_{i_j}\deriveBaseM{\baseB}p_{i_j}$ for each $i\in \{1,\dots,n\}$ and $j \in \{1,\dots,l_i\}$ then $C_1\msetsum\dots\msetsum C_n\deriveBaseM{\baseB}q$.
 \end{itemize}
 \end{definition}
 
@@ -166,15 +166,15 @@ The relation of derivability in a contextual base $\baseB$, is defined as so:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Example derivations}
 	\begin{example}
-		Let $\baseB=\{\langle\emptymultiset, a\rangle, \langle\langle\emptymultiset, a\rangle,\langle\emptymultiset, b\rangle, c\rangle\}$
+		Let $\baseB=\{(\Rightarrow a), ((\Rightarrow a),(\Rightarrow b) \Rightarrow c)\}$
 		\begin{prooftree}
 			\AxiomC{}
 			\RightLabel{Ref}
 			\UnaryInfC{$b\deriveBaseIPL{\baseB}b$}
 			\AxiomC{}
-			\RightLabel{$\langle\emptymultiset, a\rangle$}
+			\RightLabel{$\Rightarrow a$}
 			\UnaryInfC{$\deriveBaseIPL{\baseB}a$}
-			\RightLabel{$\langle\langle\emptymultiset, a\rangle,\langle\emptymultiset, b\rangle, c\rangle$}
+			\RightLabel{$(\Rightarrow a),(\Rightarrow b)\Rightarrow c$}
 			\BinaryInfC{$b\deriveBaseIPL{\baseB}c$}
 		\end{prooftree}
 	\end{example}
@@ -182,15 +182,15 @@ The relation of derivability in a contextual base $\baseB$, is defined as so:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Example derivations}
 	\begin{example}
-		Let $\baseB=\{\langle \emptymultiset, a\rangle,\langle\openaddrule \langle\emptymultiset, a \rangle\closeaddrule,\openaddrule\langle\emptymultiset, b\rangle\closeaddrule, c\rangle\}$
+		Let $\baseB=\{(\Rightarrow a),(\openaddrule \Rightarrow a\closeaddrule,\openaddrule \Rightarrow b\closeaddrule\Rightarrow c)\}$
 		\begin{prooftree}
 			\AxiomC{}
 			\RightLabel{Ref}
 			\UnaryInfC{$b\deriveBaseM{\baseB}b$}
 			\AxiomC{}
-			\RightLabel{$\langle \emptymultiset, a\rangle$}
+			\RightLabel{$\Rightarrow a$}
 			\UnaryInfC{$\deriveBaseM{\baseB}a$}
-			\RightLabel{$\langle\openaddrule \langle\emptymultiset, a \rangle\closeaddrule,\openaddrule\langle\emptymultiset, b\rangle\closeaddrule, c\rangle$}
+			\RightLabel{$\openaddrule \Rightarrow a \closeaddrule,\openaddrule \Rightarrow b\closeaddrule\Rightarrow c$}
 			\BinaryInfC{$b\deriveBaseM{\baseB}c$}
 		\end{prooftree}
 	\end{example}
@@ -202,13 +202,13 @@ The relation of derivability in a contextual base $\baseB$, is defined as so:
 	\end{example}
 	\pause
 	\begin{example}
-		Let $\baseB=\{\langle\openaddrule\langle\emptymultiset, a\rangle\closeaddrule, c\rangle, \langle\openaddrule \langle a,c\rangle\closeaddrule, b\rangle\}$
+		Let $\baseB=\{(\openaddrule \Rightarrow a\closeaddrule\Rightarrow c), (\openaddrule a\Rightarrow c\closeaddrule\Rightarrow b)\}$
 		\begin{prooftree}
 			\AxiomC{$\times$}
 			\UnaryInfC{$a\msetsum a\deriveBaseM{\baseB}a$}
-			\RightLabel{$\langle\openaddrule\langle\emptymultiset, a\rangle\closeaddrule, c\rangle$}
+			\RightLabel{$\openaddrule \Rightarrow a\closeaddrule\Rightarrow c$}
 			\UnaryInfC{$a\msetsum a\deriveBaseM{\baseB}c$}
-			\RightLabel{$\langle\openaddrule \langle a,c\rangle\closeaddrule, b\rangle$}
+			\RightLabel{$\openaddrule a\Rightarrow c\closeaddrule\Rightarrow b$}
 			\UnaryInfC{$a\deriveBaseM{\baseB}b$}
 		\end{prooftree}
 		We see that in this base, $a$ is not derivable from $a\msetsum a$.
@@ -217,25 +217,26 @@ The relation of derivability in a contextual base $\baseB$, is defined as so:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Example derivations}
 	\begin{example}
-		Let $\baseB=\{\langle\langle\emptymultiset, a\rangle, c\rangle, \langle \langle a,c\rangle, b\rangle\}$
+		Let $\baseB=\{((\Rightarrow a)\Rightarrow c), ((a\Rightarrow c)\Rightarrow b)\}$
 		\begin{prooftree}
 			\AxiomC{}
 			\RightLabel{Ref}
 			\UnaryInfC{$a\msetsum a\deriveBaseIPL{\baseB}a$}
-			\RightLabel{$\langle\langle\emptymultiset, a\rangle, c\rangle$}
+			\RightLabel{$(\Rightarrow a)\Rightarrow c$}
 			\UnaryInfC{$a\msetsum a\deriveBaseIPL{\baseB}c$}
-			\RightLabel{$\langle\langle a,c\rangle, b\rangle$}
+			\RightLabel{$(a\Rightarrow c)\Rightarrow b$}
 			\UnaryInfC{$a\deriveBaseIPL{\baseB}b$}
 		\end{prooftree}
 	\end{example}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Example derivations}
-		Let $\baseB = \{
-		\langle\openaddrule\langle\emptymultiset, b\rangle\closeaddrule, c\rangle,
-		\langle\openaddrule\langle\emptymultiset, a\rangle\closeaddrule,\openaddrule\langle b, c\rangle\closeaddrule, d\rangle,
-		\langle\openaddrule\langle\emptymultiset, d\rangle, \langle\emptymultiset, a\rangle \closeaddrule, e\rangle,
-		\langle\openaddrule\langle a, e\rangle\closeaddrule, f\rangle
+	\begin{example}[A very interesting derivation]
+		Let $\baseB$ be the following set of rules: \\$\{
+		(\openaddrule\Rightarrow b\closeaddrule\Rightarrow c),
+		(\openaddrule\Rightarrow a\closeaddrule,\openaddrule b\Rightarrow c\closeaddrule\Rightarrow d),
+		(\openaddrule\Rightarrow d, \Rightarrow a \closeaddrule\Rightarrow e),
+		(\openaddrule a\Rightarrow e\closeaddrule\Rightarrow f)
 		\}$
 		\begin{prooftree}
 			\AxiomC{}
@@ -244,18 +245,65 @@ The relation of derivability in a contextual base $\baseB$, is defined as so:
 			\AxiomC{}
 			\RightLabel{Ref}
 			\UnaryInfC{$b\deriveBaseM{\baseB}b$}
-			\RightLabel{$\langle\openaddrule\langle\emptymultiset, b\rangle\closeaddrule, c\rangle$}
+			\RightLabel{$\openaddrule\Rightarrow b\closeaddrule\Rightarrow c$}
 			\UnaryInfC{$b\deriveBaseM{\baseB}c$}
-			\RightLabel{$\langle\openaddrule\langle\emptymultiset, a\rangle\closeaddrule,\openaddrule\langle b, c\rangle\closeaddrule, d\rangle$}
+			\RightLabel{$\openaddrule\Rightarrow a\closeaddrule,\openaddrule b\Rightarrow c\closeaddrule\Rightarrow d$}
 			\BinaryInfC{$a\deriveBaseM{\baseB}d$}
 			\AxiomC{}
 			\RightLabel{Ref}
 			\UnaryInfC{$a\deriveBaseM{\baseB}a$}
-			\RightLabel{$\langle\openaddrule\langle\emptymultiset, d\rangle, \langle\emptymultiset, a\rangle \closeaddrule, e\rangle$}
+			\RightLabel{$\openaddrule\Rightarrow d, \Rightarrow a \closeaddrule\Rightarrow e$}
 			\BinaryInfC{$a\deriveBaseM{\baseB}e$}
-			\RightLabel{$\langle\openaddrule\langle a, e\rangle\closeaddrule, f\rangle$}
+			\RightLabel{$\openaddrule a\Rightarrow e\closeaddrule\Rightarrow f$}
 			\UnaryInfC{$\deriveBaseM{\baseB}f$}
 		\end{prooftree}
+	\end{example}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Example derivations}
+	\begin{example}[A live complicated derivation!]
+		Consider a base $\baseB$ with only the following rules:
+		\begin{itemize}
+			\item $\openaddrule\Rightarrow c\closeaddrule,\openaddrule\Rightarrow y\closeaddrule\Rightarrow f$
+			\item $\Rightarrow z$
+			\item $\openaddrule \Rightarrow a\closeaddrule,\openaddrule \Rightarrow b\closeaddrule,\openaddrule\Rightarrow z\closeaddrule\Rightarrow h$
+			\item $\openaddrule\Rightarrow h\closeaddrule\Rightarrow g$			\item $\openaddrule\Rightarrow x\closeaddrule,\openaddrule\Rightarrow g\closeaddrule\Rightarrow e$
+			\item $\openaddrule x\Rightarrow e\closeaddrule,\openaddrule y\Rightarrow f\closeaddrule\Rightarrow d$
+		\end{itemize}
+		is there a derivation of $d$ from the multiset $a\msetsum b\msetsum c$ in $\baseB$?
+%		\begin{prooftree}
+%			\AxiomC{}
+%			\RightLabel{Ref}
+%			\UnaryInfC{$f\deriveBaseM{\baseB}f$}
+%			\AxiomC{}
+%			\RightLabel{Ref}
+%			\UnaryInfC{$c\deriveBaseM{\baseB}c$}
+%			\RightLabel{$\openaddrule\Rightarrow c\closeaddrule,\openaddrule\Rightarrow y\closeaddrule\Rightarrow f$}
+%			\BinaryInfC{$c,y\deriveBaseM{\baseB}f$}
+%			\AxiomC{}
+%			\RightLabel{$\Rightarrow z$}
+%			\UnaryInfC{$\deriveBaseM{\baseB}z$}
+%			\AxiomC{}
+%			\RightLabel{Inf}
+%			\UnaryInfC{$b\deriveBaseM{\baseB}b$}
+%			\AxiomC{}
+%			\RightLabel{Inf}
+%			\UnaryInfC{$a\deriveBaseM{\baseB}a$}
+%			\RightLabel{$\openaddrule \Rightarrow a\closeaddrule,\openaddrule \Rightarrow b\closeaddrule,\openaddrule\Rightarrow z\closeaddrule\Rightarrow h$}
+%			\TrinaryInfC{$a,b,\deriveBaseM{\baseB}h$}
+%			\RightLabel{$\openaddrule\Rightarrow h\closeaddrule\Rightarrow g$}
+%			\UnaryInfC{$a,b\deriveBaseM{\baseB}g$}
+%			\AxiomC{}
+%			\RightLabel{Ref}
+%			\UnaryInfC{$x\deriveBaseM{\baseB}x$}
+%			\RightLabel{$\openaddrule\Rightarrow x\closeaddrule,\openaddrule\Rightarrow g\closeaddrule\Rightarrow e$}
+%			\BinaryInfC{$a,b,x\deriveBaseM{\baseB}e$}
+%			\RightLabel{$\openaddrule x\Rightarrow e\closeaddrule,\openaddrule y\Rightarrow f\closeaddrule\Rightarrow d$}
+%			\BinaryInfC{$a,b,c\deriveBaseM{\baseB}b$}
+%		\end{prooftree}
+	\end{example}
+%	\pause 
+%	\emph{Disclaimer: The fact I couldn't fit this derivation on the slide has nothing to do with why we are doing this derivation live :-)}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -264,9 +312,9 @@ The relation of derivability in a contextual base $\baseB$, is defined as so:
 \begin{definition}[Structural rules]
 	We define two rules:
 	\begin{itemize}
-		\item $\text{Wk}^p_q = \langle\openaddrule\langle \emptymultiset, p\rangle\closeaddrule, \openaddrule\langle\emptymultiset, q\rangle\closeaddrule, q \rangle$
+		\item $\text{Wk}^p_q = (\openaddrule \Rightarrow p\closeaddrule, \openaddrule \Rightarrow q \closeaddrule\Rightarrow q)$
 		%
-		\item $\text{Ctn}^p_q = \langle\openaddrule\langle \emptymultiset, p\rangle\closeaddrule, \openaddrule\langle p\msetsum p,q\rangle\closeaddrule, q \rangle$.
+		\item $\text{Ctn}^p_q = (\openaddrule \Rightarrow p \closeaddrule, \openaddrule p\msetsum p\Rightarrow q\closeaddrule\Rightarrow q)$
 	\end{itemize}
 \end{definition}
 \end{frame}
@@ -275,16 +323,21 @@ The relation of derivability in a contextual base $\baseB$, is defined as so:
 	\pause
 	\begin{definition}
 		Let $\baseB$ be a context-free base. We define structural contextualisation of that base $\iplill{\baseB}$ as follows: 
+		\begin{minipage}{\textwidth}\scriptsize
 		\begin{align*}
-		\iplill{\baseB} &= \,\{ \langle\openaddrule\langle P_1, p_1\rangle\closeaddrule, \dots, \openaddrule\langle P_n, p_n\rangle\closeaddrule, q\rangle \, | \, \langle\langle P_1, p_1\rangle, \dots, \langle P_n, p_n\rangle, q\rangle\in\baseB \}\\ 
+		\iplill{\baseB} &= \,\{ \openaddrule P_1\Rightarrow p_1\closeaddrule, \dots, \openaddrule P_n\Rightarrow p_n\closeaddrule\Rightarrow q \, | \, ((P_1\Rightarrow p_1), \dots, (P_n\Rightarrow p_n)\Rightarrow q) \in\baseB \}\\ 
 		& \cup \{\text{Wk}^p_q, \text{Ctn}^p_q \,|\, \forall p, q \in \At\}
 		\end{align*}
+	\end{minipage}
 	\end{definition}
-	We define the decontextualisation of a contextual base $\illipl{\baseB}$
-	as:
-	\[
-	\illipl{\baseB} = \{ \langle\langle P_{1_1}, p_{1_{1}}\rangle,\dots,\langle P_{n_{l_n}}, p_{n_{l_n}}\rangle, q\rangle \, |\, \langle\openaddrule(P_{1_i}, p_{1_{i}})\Closeaddrule{i=1}{l_1},\dots,\openaddrule(P_{n_i}, p_{n_{i}}) \Closeaddrule{i=1}{l_n}, q\rangle \in \baseB\}
-	\]
+	\pause
+	We define the decontextualisation of a contextual base as:
+	%\begin{minipage}{\textwidth}\scriptsize
+	\begin{align*}
+	\illipl{\baseB} = \{& (P_{1_1}\Rightarrow p_{1_{1}}),\dots,(P_{n_{l_n}}\Rightarrow p_{n_{l_n}})\Rightarrow q \\
+	&|\, (\openaddrule P_{1_i}\Rightarrow p_{1_{i}}\Closeaddrule{i=1}{l_1},\dots,\openaddrule P_{n_i}\Rightarrow p_{n_{i}} \Closeaddrule{i=1}{l_n}\Rightarrow q) \in \baseB\}
+	\end{align*}
+	%\end{minipage}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Properties of these mappings}
@@ -303,34 +356,34 @@ The relation of derivability in a contextual base $\baseB$, is defined as so:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Structural admissibility in a structurally contextualised base}
 	\begin{lemma}
-		Suppose $L\deriveBaseM{\iplill{\baseB}}p$ holds. Then $S\msetsum L\deriveBaseM{\iplill{\baseB}}p$ also holds for any atomic multiset $S$.
+		Suppose $L\deriveBaseM{\iplill{\baseB}}p$ holds. Then $R\msetsum L\deriveBaseM{\iplill{\baseB}}p$ also holds for any atomic multiset $R$.
 	\end{lemma}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\begin{proof}
-		Let $S = \{s_1\msetsum\dots\msetsum s_n\}$ for some $n$. Then we have that we can effectively weaken $S$ away as follows:
+		Let $R = \{r_1,\dots , r_n\}$ for some $n$. Then we have that we can effectively weaken $S$ away as follows:
 
 		\begin{minipage}{0.5\textwidth}\scriptsize
 		\begin{prooftree}
 		\AxiomC{}
 		\RightLabel{Ref}
-		\UnaryInfC{$s_1\deriveBaseM{\iplill{\baseB}}s_1$}
+		\UnaryInfC{$r_1\deriveBaseM{\iplill{\baseB}}r_1$}
 		\AxiomC{}
 		\RightLabel{Ref}
-		\UnaryInfC{$s_{n-1}\deriveBaseM{\iplill{\baseB}}s_{n-1}$}
+		\UnaryInfC{$r_{n-1}\deriveBaseM{\iplill{\baseB}}r_{n-1}$}
 		\AxiomC{}
 		\RightLabel{Ref}
-		\UnaryInfC{$s_n\deriveBaseM{\iplill{\baseB}}s_n$}
+		\UnaryInfC{$r_n\deriveBaseM{\iplill{\baseB}}r_n$}
 		\AxiomC{$L\deriveBaseM{\iplill{\baseB}}p$}
-		\RightLabel{$\text{Wk}^{s_n}_p$}
-		\BinaryInfC{$s_n\msetsum L \deriveBaseM{\iplill{\baseB}}p$}
-		\RightLabel{$\text{Wk}^{s_{n-1}}_p$}
+		\RightLabel{$\text{Wk}^{r_n}_p$}
+		\BinaryInfC{$r_n\msetsum L \deriveBaseM{\iplill{\baseB}}p$}
+		\RightLabel{$\text{Wk}^{r_{n-1}}_p$}
 		\BinaryInfC{\vdots}
 		\noLine
-		\UnaryInfC{$s_2\msetsum\dots\msetsum s_n \deriveBaseM{\iplill{\baseB}}p$}
-		\RightLabel{$\text{Wk}^{s_1}_p$}
-		\BinaryInfC{$S\msetsum L \deriveBaseM{\iplill{\baseB}}p$}
+		\UnaryInfC{$r_2\msetsum\dots\msetsum r_n\msetsum L \deriveBaseM{\iplill{\baseB}}p$}
+		\RightLabel{$\text{Wk}^{r_1}_p$}
+		\BinaryInfC{$R\msetsum L \deriveBaseM{\iplill{\baseB}}p$}
 		\end{prooftree}
 		\end{minipage}
 	\end{proof}
@@ -338,38 +391,38 @@ The relation of derivability in a contextual base $\baseB$, is defined as so:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Structural admissibility in a structurally contextualised base}
 	\begin{lemma}
-		Suppose $L\msetsum L \deriveBaseM{\iplill{\baseB}}p$ holds. Then $L\deriveBaseM{\iplill{\baseB}}p$ also holds.
+		Suppose $R\msetsum R \deriveBaseM{\iplill{\baseB}}p$ holds. Then $R\deriveBaseM{\iplill{\baseB}}p$ also holds.
 	\end{lemma}
 	\pause
 	\begin{corollary}
-		For arbitrary $m\geq 1$, if $L^m\deriveBaseM{\iplill{\baseB}}p$ then $L\deriveBaseM{\iplill{\baseB}}p$.
+		For arbitrary $m\geq 1$, if $R^m\deriveBaseM{\iplill{\baseB}}p$ then $R\deriveBaseM{\iplill{\baseB}}p$.
 	\end{corollary}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\begin{proof}
-		Let $L = \{l_1\msetsum\dots\msetsum l_n\}$ for some $n$. Then we have that we can effectively contract on $L$ as follows:
+		Let $R = \{r_1, \dots , r_n\}$ for some $n$. Then we have that we can effectively contract on $R$ as follows:
 
 		\begin{minipage}{0.5\textwidth}\scriptsize
 			\begin{prooftree}
 				\AxiomC{}
 				\RightLabel{Ref}
-				\UnaryInfC{$l_1\deriveBaseM{\iplill{\baseB}}l_1$}
+				\UnaryInfC{$r_1\deriveBaseM{\iplill{\baseB}}r_1$}
 				\AxiomC{}
 				\RightLabel{Ref}
-				\UnaryInfC{$l_{n-1}\deriveBaseM{\iplill{\baseB}}l_{n-1}$}
+				\UnaryInfC{$r_{n-1}\deriveBaseM{\iplill{\baseB}}r_{n-1}$}
 				\AxiomC{}
 				\RightLabel{Ref}
-				\UnaryInfC{$l_n\deriveBaseM{\iplill{\baseB}}l_n$}
-				\AxiomC{$L\msetsum L\deriveBaseM{\iplill{\baseB}}p$}
-				\RightLabel{$\text{Ctn}^{l_n}_p$}
-				\BinaryInfC{$l_1\msetsum\dots\msetsum l_{n-1}\msetsum L \deriveBaseM{\iplill{\baseB}}p$}
-				\RightLabel{$\text{Ctn}^{l_{n-1}}_p$}
+				\UnaryInfC{$r_n\deriveBaseM{\iplill{\baseB}}r_n$}
+				\AxiomC{$R\msetsum R\deriveBaseM{\iplill{\baseB}}p$}
+				\RightLabel{$\text{Ctn}^{r_n}_p$}
+				\BinaryInfC{$r_1\msetsum\dots\msetsum r_{n-1}\msetsum R \deriveBaseM{\iplill{\baseB}}p$}
+				\RightLabel{$\text{Ctn}^{r_{n-1}}_p$}
 				\BinaryInfC{\vdots}
 				\noLine
-				\UnaryInfC{$l_1\msetsum L \deriveBaseM{\iplill{\baseB}}p$}
-				\RightLabel{$\text{Ctn}^{l_1}_p$}
-				\BinaryInfC{$L\deriveBaseM{\iplill{\baseB}}p$}
+				\UnaryInfC{$r_1\msetsum R \deriveBaseM{\iplill{\baseB}}p$}
+				\RightLabel{$\text{Ctn}^{r_1}_p$}
+				\BinaryInfC{$R\deriveBaseM{\iplill{\baseB}}p$}
 			\end{prooftree}
 		\end{minipage}
 	\end{proof}
@@ -377,16 +430,16 @@ The relation of derivability in a contextual base $\baseB$, is defined as so:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Key results under this base translation}
 	\begin{itemize}
-		\item If $L\deriveBaseIPL{\baseB}p$ then $L\deriveBaseM{\iplill{\baseB}}p$.
+		\item If $R\deriveBaseIPL{\baseB}p$ then $R\deriveBaseM{\iplill{\baseB}}p$.
 		\vspace{0.3cm}
 		\pause
-		\item $L\deriveBaseM{\iplill{\baseB}}p$ iff for all bases $\baseX \baseGeq \iplill{\baseB}$ where for each $l \in L$ we have $\deriveBaseM{\baseX}l$ then it follows that $\deriveBaseM{\baseX}p$.
+		\item $R\deriveBaseM{\iplill{\baseB}}p$ iff for all bases $\baseX \baseGeq \iplill{\baseB}$ where for each $r \in R$ we have $\deriveBaseM{\baseX}r$ then it follows that $\deriveBaseM{\baseX}p$.
 		\vspace{0.3cm}
 		\pause
-		\item $L\deriveBaseM{\iplill{\baseB}}p$ iff $\bang L \suppM{\iplill{\baseB}}{\emptymultiset}p$
+		\item $R\deriveBaseM{\iplill{\baseB}}p$ iff $\bang R \suppM{\iplill{\baseB}}{\emptymultiset}p$
 		\vspace{0.3cm}
 		\pause
-		\item $\suppM{\iplill{\baseB}}{L}p$ iff $\bang L\suppM{\iplill{\baseB}}{\emptymultiset}p$
+		\item $\suppM{\iplill{\baseB}}{R}p$ iff $\bang R\suppM{\iplill{\baseB}}{\emptymultiset}p$
 	\end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
