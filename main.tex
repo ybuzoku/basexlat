@@ -217,6 +217,21 @@ The relation of derivability in a contextual base $\baseB$, is defined as so:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Example derivations}
 	\begin{example}[A possible fix]
+		Let $\illipl{\baseB}=\{((\Rightarrow a)\Rightarrow c), ((a\Rightarrow c)\Rightarrow b)\}$
+		\begin{prooftree}
+			\AxiomC{}
+			\RightLabel{Ref}
+			\UnaryInfC{$a\msetsum a\deriveBaseIPL{\illipl{\baseB}}a$}
+			\RightLabel{$(\Rightarrow a)\Rightarrow c$}
+			\UnaryInfC{$a\msetsum a\deriveBaseIPL{\illipl{\baseB}}c$}
+			\RightLabel{$(a\Rightarrow c)\Rightarrow b$}
+			\UnaryInfC{$a\deriveBaseIPL{\illipl{\baseB}}b$}
+		\end{prooftree}
+	\end{example}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Example derivations}
+	\begin{example}[Another possible fix]
 		Let $\baseC=\{(\openaddrule \Rightarrow a\closeaddrule\Rightarrow c), (\openaddrule a\Rightarrow c\closeaddrule\Rightarrow b),(\openaddrule\Rightarrow a\closeaddrule,\openaddrule\Rightarrow a\closeaddrule\Rightarrow a)\}$
 		\begin{prooftree}
 			\AxiomC{}
@@ -231,21 +246,6 @@ The relation of derivability in a contextual base $\baseB$, is defined as so:
 			\UnaryInfC{$a\msetsum a\deriveBaseM{\baseC}c$}
 			\RightLabel{$\openaddrule a\Rightarrow c\closeaddrule\Rightarrow b$}
 			\UnaryInfC{$a\deriveBaseM{\baseC}b$}
-		\end{prooftree}
-	\end{example}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Example derivations}
-	\begin{example}[Another possible fix]
-		Let $\illipl{\baseB}=\{((\Rightarrow a)\Rightarrow c), ((a\Rightarrow c)\Rightarrow b)\}$
-		\begin{prooftree}
-			\AxiomC{}
-			\RightLabel{Ref}
-			\UnaryInfC{$a\msetsum a\deriveBaseIPL{\illipl{\baseB}}a$}
-			\RightLabel{$(\Rightarrow a)\Rightarrow c$}
-			\UnaryInfC{$a\msetsum a\deriveBaseIPL{\illipl{\baseB}}c$}
-			\RightLabel{$(a\Rightarrow c)\Rightarrow b$}
-			\UnaryInfC{$a\deriveBaseIPL{\illipl{\baseB}}b$}
 		\end{prooftree}
 	\end{example}
 \end{frame}
